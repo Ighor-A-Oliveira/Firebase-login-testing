@@ -1,23 +1,19 @@
 import { initializeApp } from "firebase/app";
-import { browserLocalPersistence, getAuth, GoogleAuthProvider, setPersistence } from "firebase/auth";
+import {getAuth, GoogleAuthProvider } from "firebase/auth";
  
 const firebaseConfig = {
-  apiKey: "AIzaSyDQFUQwvp9wozLmSYIFdc8bagraCsN8T9o",
-  authDomain: "login-test-fd72a.firebaseapp.com",
-  projectId: "login-test-fd72a",
-  storageBucket: "login-test-fd72a.firebasestorage.app",
-  messagingSenderId: "106769796114",
-  appId: "1:106769796114:web:a5c8b97f519fa1f1139ccb",
-  measurementId: "G-YFN3851T3F"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
-
-setPersistence(auth, browserLocalPersistence).catch((error) => {
-  console.error("Error setting persistence:", error);
-});
 
 export { auth, googleProvider };
