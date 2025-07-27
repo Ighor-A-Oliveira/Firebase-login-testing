@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "/*"
+  to = "/:splat"
+  status = 200
+  conditions = { DeployContext = "deploy-preview" }
+[[redirects]]
+  from = "/__/auth/*"
+  to = "https://login-test-fd72a.firebaseapp.com/__/auth/:splat"
+  status = 200
+  force = true
