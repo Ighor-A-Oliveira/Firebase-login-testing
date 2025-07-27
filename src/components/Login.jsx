@@ -1,14 +1,26 @@
-import { signInWithPopup} from 'firebase/auth';
+import { getRedirectResult, signInWithRedirect} from 'firebase/auth';
 
 import { auth, googleProvider } from '../../firebase';
+import { useEffect } from 'react';
 
 export default function Login() {
  
+    useEffect(() => {
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result?.user) {
+          console.log("Signed in user:", result.user);
+        }
+      })
+      .catch((error) => {
+        console.error("Redirect error:", error);
+      });
+  }, []);
   
 
   async function signIn() {
     try {
-      await signInWithPopup(auth, googleProvider);
+      await signInWithRedirect(auth, googleProvider);
     } catch (error) {
      console.error("Authentication error", error);
     }
